@@ -84,4 +84,7 @@ class Aplikacja(Tk):
 
     def __dziennikCallback(self):
 
-        pass
+        dziennik = self._wizualizacja.getDziennik().wypisz()
+        popup = Toplevel(self)
+        popup.title("dziennik")
+        Label(popup, text=dziennik).pack()

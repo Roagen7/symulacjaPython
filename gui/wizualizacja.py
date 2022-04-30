@@ -67,4 +67,5 @@ class Wizualizacja(Canvas):
         self.__swiat.wykonajTure()
 
 
-
+    def getDziennik(self):
+        return self.__swiat.getDziennik()

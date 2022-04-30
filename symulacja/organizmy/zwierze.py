@@ -115,6 +115,9 @@ class Zwierze(Organizm):
 
             self.zabij()
             self.dodajModyfikator(drugi)
+
+            self._swiat.getDziennik().wpisz(f"{str(drugi)} zjada {str(self)}")
+
             return
 
         if drugi.czyOdbilAtak(self):
@@ -124,4 +127,4 @@ class Zwierze(Organizm):
 
         drugi.zabij()
         drugi.dodajModyfikator(self)
-
+        self._swiat.getDziennik().wpisz(f"{str(self)} zjada {str(drugi)}")

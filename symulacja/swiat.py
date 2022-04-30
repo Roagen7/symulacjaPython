@@ -1,5 +1,6 @@
 from random import randint
 
+from pomocnicze.dziennik import Dziennik
 from pomocnicze.wektor2d import Wektor2d
 from symulacja.organizmy.organizm import Organizm
 from symulacja.organizmy.roslina import Roslina
@@ -20,12 +21,16 @@ class Swiat:
         self.__szerokosc = szerokosc
         self.__organizmy = organizmy
         self.__nrTury = 0
+        self.__dziennik = Dziennik()
 
     def getWysokosc(self):
         return self.__wysokosc
 
     def getSzerokosc(self):
         return self.__szerokosc
+
+    def getDziennik(self):
+        return self.__dziennik
 
     def getOrganizmNaPozycji(self, pozycja: Wektor2d) -> Organizm:
 
@@ -42,6 +47,8 @@ class Swiat:
         return szukany
 
     def wykonajTure(self):
+
+        self.__dziennik.czysc()
 
         for org in self.__organizmy:
             org.nowaTura()

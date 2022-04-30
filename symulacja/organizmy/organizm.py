@@ -57,6 +57,7 @@ class Organizm(ABC):
 
     def zabij(self):
 
+        self._swiat.getDziennik().wpisz(f"{str(self)} umiera")
         self._zywy = False
 
 
