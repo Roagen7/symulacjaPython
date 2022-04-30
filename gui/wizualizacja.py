@@ -69,3 +69,7 @@ class Wizualizacja(Canvas):
 
     def getDziennik(self):
         return self.__swiat.getDziennik()
+
+    def setSwiat(self, swiat: Swiat):
+        self.__swiat = swiat
+

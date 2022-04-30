@@ -64,8 +64,8 @@ class Aplikacja(Tk):
 
     def __bazowyCallback(self):
 
-        pass
-
+        self._wizualizacja.setSwiat(Swiat.Bazowy())
+        self._wizualizacja.paint()
 
     def __wczytajCallback(self):
 
