@@ -79,6 +79,7 @@ class Aplikacja(Tk):
 
     def __nastepnaTuraCallback(self):
 
+        self._wizualizacja.nastepnaTura()
         self._wizualizacja.paint()
 
     def __dziennikCallback(self):

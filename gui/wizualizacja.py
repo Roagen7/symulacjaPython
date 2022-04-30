@@ -1,5 +1,7 @@
 from tkinter import *
 from tkinter import ttk
+
+from pomocnicze.wektor2d import Wektor2d
 from symulacja.swiat import Swiat
 
 from random import randint
@@ -38,12 +40,15 @@ class Wizualizacja(Canvas):
         for y in range(self.__wysokosc):
             for x in range(self.__szerokosc):
 
-                self.create_rectangle(x * self.__rozmiarZwierzecia,
+                org = self.__swiat.getOrganizmNaPozycji(Wektor2d(y,x))
+
+                if not org is None:
+
+                    self.create_rectangle(x * self.__rozmiarZwierzecia,
                                       y * self.__rozmiarZwierzecia,
                                       x * self.__rozmiarZwierzecia + self.__rozmiarZwierzecia,
                                       y * self.__rozmiarZwierzecia + self.__rozmiarZwierzecia,
-                                      fill="#"+("%06x"%randint(0,16777215)))
-
+                                      fill=org.rysowanie())
 
 
     def __eventy(self):
@@ -57,6 +62,10 @@ class Wizualizacja(Canvas):
 
         self.bind("<Button-1>",klik)
         self.bind("<Key>",klawisz)
+
+
+    def nastepnaTura(self):
+        self.__swiat.wykonajTure()
 
 
 
