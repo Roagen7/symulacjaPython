@@ -34,7 +34,6 @@ class Wizualizacja(Canvas):
     def paint(self):
 
 
-
         self.create_rectangle(0,0,self.__rozmiarZwierzecia *self.__szerokosc, self.__rozmiarZwierzecia * self.__wysokosc, fill=Wizualizacja.__KOLOR_TLA)
 
         for y in range(self.__wysokosc):

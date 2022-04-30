@@ -45,6 +45,10 @@ class Organizm(ABC):
 
         return self._wiek
 
+    def setWiek(self, wiek: int):
+
+        self._wiek = wiek
+
 
     def isZywy(self) -> bool:
 
@@ -84,6 +88,11 @@ class Organizm(ABC):
     def setSwiat(self, swiat):
 
         self._swiat = swiat
+
+    @abstractmethod
+    def __str__(self):
+        pass
+
 
     @abstractmethod
     def akcja(self):

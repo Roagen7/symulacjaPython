@@ -22,7 +22,6 @@ class Wektor2d:
         return self.getX() == other.getX() and self.getY() == other.getY()
 
 
-
     def __add__(self, other):
 
         return Wektor2d(self.getY() + other.getY(), self.getX() + other.getX())

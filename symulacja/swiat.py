@@ -1,3 +1,5 @@
+from random import randint
+
 from pomocnicze.wektor2d import Wektor2d
 from symulacja.organizmy.organizm import Organizm
 from symulacja.organizmy.zwierze import Zwierze
@@ -40,25 +42,24 @@ class Swiat:
 
     def wykonajTure(self):
 
+        for org in self.__organizmy:
+            org.nowaTura()
+
         self.__nrTury+=1
         self.__ruchOrganizmow()
-        self.__pozbadzSieZwlok()
 
+        self.__organizmy = [x for x in self.__organizmy if x.isZywy()] # pozbadz sie zwlok
 
-    @staticmethod
-    def Bazowy():
-
-        swiat = Swiat(30, 30, [
-            Zwierze(Wektor2d(1,1),1,1),
-            Zwierze(Wektor2d(2, 2), 1, 1)
-
-        ])
-
-        return swiat
+    def addOrganizm(self, org: Organizm):
+        org.setSwiat(self)
+        self.__organizmy.append(org)
 
     def __ruchOrganizmow(self):
 
-        # self.__organizmy.sort()
+
+        self.__organizmy = sorted(self.__organizmy,reverse=True, key= lambda x: x.getWiek())
+        self.__organizmy = sorted(self.__organizmy, reverse=True, key= lambda x: x.getInicjatywa())
+
         for org in self.__organizmy:
 
             if org.isZywy():
@@ -68,6 +69,60 @@ class Swiat:
 
             org.starzejSie()
 
+    def getWolnePoleObok(self, p : Wektor2d, zasieg = 1):
 
-    def __pozbadzSieZwlok(self):
-        pass
+        for dy in [-1 * zasieg, 0, zasieg]:
+
+            for dx in [-1 * zasieg, 0, zasieg]:
+
+                punkt =  Wektor2d(dy,dx) + p
+
+                if punkt != p \
+                        and self.getOrganizmNaPozycji(punkt) is None \
+                        and not punkt.pozaGranicami(self.getWysokosc(),self.getSzerokosc()):
+                    return punkt
+
+        return p
+
+    def getLosowePoleObok(self, p : Wektor2d, zasieg = 1):
+
+        punkty = []
+
+        for dy in [-1 * zasieg, 0, zasieg]:
+
+            for dx in [-1 * zasieg, 0, zasieg]:
+
+                punkt =  Wektor2d(dy,dx) + p
+
+                if punkt != p \
+                        and not punkt.pozaGranicami(self.getWysokosc(),self.getSzerokosc()):
+                    punkty.append(Wektor2d(dy,dx))
+
+        if len(punkty):
+            return punkty[randint(0,len(punkty) - 1)]
+
+        return None
+
+
+
+    def getKolidujacy(self, org):
+
+        temp =  [x for x in self.__organizmy if x.getPolozenie() == org.getPolozenie() and x != org]
+
+        if len(temp):
+            return temp[0]
+
+        return None
+
+
+    @staticmethod
+    def Bazowy():
+
+        swiat = Swiat(30, 30, [
+
+            Zwierze(Wektor2d(1,1),1,1),
+            Zwierze(Wektor2d(2, 2), 2, 2)
+
+        ])
+
+        return swiat
