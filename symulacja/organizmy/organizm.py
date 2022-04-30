@@ -70,9 +70,26 @@ class Organizm(ABC):
         return False
 
 
-    def czyUciekl(self,other) -> bool:
+    def czyUciekl(self) -> bool:
 
         return False
+
+    def ucieczka(self) -> bool:
+
+        if self.czyUciekl():
+
+            nowePole = self._swiat.getWolnePoleObok(self._polozenie)
+
+            if nowePole == self._polozenie:
+
+                return False
+
+            self.setPolozenie(nowePole)
+
+            return True
+
+        return False
+
 
 
     def czyMaDobryWech(self):

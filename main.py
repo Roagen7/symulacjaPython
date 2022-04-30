@@ -1,5 +1,6 @@
 import symulacja.organizmy.organizm
 from gui.aplikacja import Aplikacja
+from pomocnicze.dziennik import Dziennik
 
 if __name__ == '__main__':
 

@@ -34,7 +34,7 @@ class Zwierze(Organizm):
             self._rozmnozSie(drugi)
             return
 
-        #WALKA
+        self._walcz(drugi)
 
 
     def nowaTura(self):
@@ -50,8 +50,6 @@ class Zwierze(Organizm):
     def _losowyRuch(self, zasieg = 1):
 
         koordynaty = [-1 * zasieg, 0,zasieg]
-
-        przemieszczenie = Wektor2d(0,0)
         wczesniejsze = Wektor2d(self._polozenie.getY(), self._polozenie.getX())
 
         while True:
@@ -102,4 +100,28 @@ class Zwierze(Organizm):
     def __cofnijSie(self):
 
         self.setPolozenie(self._wczesniejszePolozenie)
+
+    def _walcz(self, drugi : Organizm):
+
+        if self.ucieczka() or drugi.ucieczka():
+            return
+
+        if self.getSila() < drugi.getSila():
+
+            if self.czyOdbilAtak(drugi):
+
+                self.__cofnijSie()
+                return
+
+            self.zabij()
+            self.dodajModyfikator(drugi)
+            return
+
+        if drugi.czyOdbilAtak(self):
+
+            self.__cofnijSie()
+            return
+
+        drugi.zabij()
+        drugi.dodajModyfikator(self)
 

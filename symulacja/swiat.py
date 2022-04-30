@@ -2,6 +2,7 @@ from random import randint
 
 from pomocnicze.wektor2d import Wektor2d
 from symulacja.organizmy.organizm import Organizm
+from symulacja.organizmy.roslina import Roslina
 from symulacja.organizmy.zwierze import Zwierze
 
 
@@ -84,7 +85,7 @@ class Swiat:
 
         return p
 
-    def getLosowePoleObok(self, p : Wektor2d, zasieg = 1):
+    def getLosoweWolnePoleObok(self, p : Wektor2d, zasieg = 1):
 
         punkty = []
 
@@ -95,8 +96,9 @@ class Swiat:
                 punkt =  Wektor2d(dy,dx) + p
 
                 if punkt != p \
+                        and self.getOrganizmNaPozycji(punkt) is None \
                         and not punkt.pozaGranicami(self.getWysokosc(),self.getSzerokosc()):
-                    punkty.append(Wektor2d(dy,dx))
+                    punkty.append(punkt)
 
         if len(punkty):
             return punkty[randint(0,len(punkty) - 1)]
@@ -118,11 +120,13 @@ class Swiat:
     @staticmethod
     def Bazowy():
 
-        swiat = Swiat(30, 30, [
+        swiat = Swiat(15, 15, [
 
             Zwierze(Wektor2d(1,1),1,1),
-            Zwierze(Wektor2d(2, 2), 2, 2)
-
+            Zwierze(Wektor2d(2, 2), 2, 2),
+            Roslina(Wektor2d(4,4),1),
+            Roslina(Wektor2d(4, 2), 1),
+            Roslina(Wektor2d(10, 10), 1),
         ])
 
         return swiat
