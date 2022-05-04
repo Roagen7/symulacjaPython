@@ -27,11 +27,6 @@ class Roslina(Organizm):
 
         pass
 
-    def rysowanie(self) -> str:
-        return "green"
-
-    def __str__(self):
-        return "ROSLINA"
 
     def rozsiej(self):
 

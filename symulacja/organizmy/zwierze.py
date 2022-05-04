@@ -13,9 +13,6 @@ class Zwierze(Organizm):
         super().__init__(polozenie, sila, inicjatywa)
         self.__rozmnozylSie = False
 
-    def __str__(self):
-        return "ZWIERZE"
-
 
     def akcja(self):
 
@@ -41,10 +38,6 @@ class Zwierze(Organizm):
 
         self.__rozmnozylSie = False
 
-
-    def rysowanie(self) -> str:
-
-        return "red"
 
 
     def _losowyRuch(self, zasieg = 1):
