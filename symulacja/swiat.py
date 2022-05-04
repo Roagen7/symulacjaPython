@@ -4,10 +4,14 @@ from pomocnicze.dziennik import Dziennik
 from pomocnicze.wektor2d import Wektor2d
 from symulacja.organizmy.organizm import Organizm
 from symulacja.organizmy.roslina import Roslina
+from symulacja.organizmy.rosliny.barszcz_sosnowskiego import BarszczSosnowskiego
+from symulacja.organizmy.rosliny.guarana import Guarana
 from symulacja.organizmy.rosliny.mlecz import Mlecz
 from symulacja.organizmy.rosliny.trawa import Trawa
 from symulacja.organizmy.rosliny.wilcze_jagody import WilczeJagody
 from symulacja.organizmy.zwierze import Zwierze
+from symulacja.organizmy.zwierzeta.antylopa import Antylopa
+from symulacja.organizmy.zwierzeta.lis import Lis
 from symulacja.organizmy.zwierzeta.owca import Owca
 from symulacja.organizmy.zwierzeta.wilk import Wilk
 from symulacja.organizmy.zwierzeta.zolw import Zolw
@@ -145,7 +149,12 @@ class Swiat:
             Mlecz(Wektor2d(9,4)),
             WilczeJagody(Wektor2d(12,14)),
             Zolw(Wektor2d(14,15)),
-            Zolw(Wektor2d(15,16))
+            Zolw(Wektor2d(15,16)),
+            Guarana(Wektor2d(17,17)),
+            BarszczSosnowskiego(Wektor2d(17, 5)),
+            Antylopa(Wektor2d(13,4)),
+            Lis(Wektor2d(12, 12))
+
         ])
 
         return swiat

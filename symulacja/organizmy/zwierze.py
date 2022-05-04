@@ -42,6 +42,10 @@ class Zwierze(Organizm):
 
     def _losowyRuch(self, zasieg = 1):
 
+
+        if self.czyMaDobryWech() and self.wszyscySasiedziSilniejsi():
+            return
+
         koordynaty = [-1 * zasieg, 0,zasieg]
         wczesniejsze = Wektor2d(self._polozenie.getY(), self._polozenie.getX())
 
@@ -54,7 +58,10 @@ class Zwierze(Organizm):
 
             self._zmienPolozenie(przemieszczenie)
 
-            if not (wczesniejsze == self._polozenie):
+            if not (wczesniejsze == self._polozenie or
+                    (self.czyMaDobryWech() and
+                     self._swiat.getKolidujacy(self) is not None and
+                     self._swiat.getKolidujacy(self).getSila() > self.getSila())):
                 break
 
     def _zmienPolozenie(self, przemieszczenie: Wektor2d):
@@ -106,10 +113,9 @@ class Zwierze(Organizm):
                 self.__cofnijSie()
                 return
 
+            self._swiat.getDziennik().wpisz(f"{str(drugi)} zjada {str(self)}")
             self.zabij()
             self.dodajModyfikator(drugi)
-
-            self._swiat.getDziennik().wpisz(f"{str(drugi)} zjada {str(self)}")
 
             return
 
@@ -118,6 +124,23 @@ class Zwierze(Organizm):
             self.__cofnijSie()
             return
 
+        self._swiat.getDziennik().wpisz(f"{str(self)} zjada {str(drugi)}")
         drugi.zabij()
         drugi.dodajModyfikator(self)
-        self._swiat.getDziennik().wpisz(f"{str(self)} zjada {str(drugi)}")
+
+    def wszyscySasiedziSilniejsi(self) -> bool:
+
+        for y in range(-1,2):
+            for x in range(-1,2):
+
+                pol = Wektor2d(y,x)
+
+                org = self._swiat.getOrganizmNaPozycji(self.getPolozenie() + pol)
+
+                if org != self and (org is None or org.getSila() <= self.getSila()):
+
+                    return False
+
+
+        return True
+
