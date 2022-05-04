@@ -117,6 +117,9 @@ class Wizualizacja(Canvas):
 
         self.create_text(10,10,text=komunikat, fill ="pink", anchor=W)
 
+    def getSwiat(self):
+        return self.__swiat
+
 
 
 

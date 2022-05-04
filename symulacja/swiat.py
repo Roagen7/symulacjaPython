@@ -121,6 +121,10 @@ class Swiat:
         return None
 
 
+    def getOrganizmy(self):
+
+        return self.__organizmy
+
 
     def getKolidujacy(self, org):
 

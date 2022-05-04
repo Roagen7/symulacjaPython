@@ -63,3 +63,6 @@ class Czlowiek(Zwierze):
 
     def __str__(self):
         return "CZLOWIEK"
+
+    def getTurySpecjalne(self):
+        return self.__turySpecjalne

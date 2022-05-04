@@ -1,6 +1,7 @@
 from tkinter import *
-from tkinter import ttk
+from tkinter import ttk, messagebox, filedialog
 from gui.wizualizacja import Wizualizacja
+from pomocnicze.menedzer_plikow import MenedzerPlikow
 from pomocnicze.wektor2d import Wektor2d
 from symulacja.organizmy.rosliny.barszcz_sosnowskiego import BarszczSosnowskiego
 from symulacja.organizmy.rosliny.guarana import Guarana
@@ -29,6 +30,7 @@ class Aplikacja(Tk):
         super().__init__()
 
         self._wizualizacja = Wizualizacja(self, int(Aplikacja.DOMYSLNA_WYSOKOSC * 9 / 10), self.__bazowySwiat())
+        self._menedzerPlikow = MenedzerPlikow()
 
         self.geometry(f"{szerokosc}x{wysokosc}")
         self.minsize(szerokosc, wysokosc)
@@ -81,12 +83,26 @@ class Aplikacja(Tk):
 
     def __wczytajCallback(self):
 
-        pass
+        fname = filedialog.askopenfilename()
+
+        if fname == "":
+            return
+
+        sw = self._menedzerPlikow.wczytaj(fname)
+
+        if sw is None:
+            messagebox.showerror("Blad","blad pliku")
+
+
 
 
     def __zapiszCallback(self):
+        fname = filedialog.askopenfilename()
 
-        pass
+        if fname == "":
+            return
+
+        self._menedzerPlikow.zapisz(self._wizualizacja.getSwiat(), fname)
 
 
     def __nastepnaTuraCallback(self):
