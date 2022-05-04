@@ -1,6 +1,18 @@
 from tkinter import *
 from tkinter import ttk
 from gui.wizualizacja import Wizualizacja
+from pomocnicze.wektor2d import Wektor2d
+from symulacja.organizmy.rosliny.barszcz_sosnowskiego import BarszczSosnowskiego
+from symulacja.organizmy.rosliny.guarana import Guarana
+from symulacja.organizmy.rosliny.mlecz import Mlecz
+from symulacja.organizmy.rosliny.trawa import Trawa
+from symulacja.organizmy.rosliny.wilcze_jagody import WilczeJagody
+from symulacja.organizmy.zwierzeta.antylopa import Antylopa
+from symulacja.organizmy.zwierzeta.czlowiek import Czlowiek
+from symulacja.organizmy.zwierzeta.lis import Lis
+from symulacja.organizmy.zwierzeta.owca import Owca
+from symulacja.organizmy.zwierzeta.wilk import Wilk
+from symulacja.organizmy.zwierzeta.zolw import Zolw
 from symulacja.swiat import Swiat
 
 
@@ -16,7 +28,7 @@ class Aplikacja(Tk):
 
         super().__init__()
 
-        self._wizualizacja = Wizualizacja(self, int(Aplikacja.DOMYSLNA_WYSOKOSC * 9 / 10), Swiat.Bazowy())
+        self._wizualizacja = Wizualizacja(self, int(Aplikacja.DOMYSLNA_WYSOKOSC * 9 / 10), self.__bazowySwiat())
 
         self.geometry(f"{szerokosc}x{wysokosc}")
         self.minsize(szerokosc, wysokosc)
@@ -64,7 +76,7 @@ class Aplikacja(Tk):
 
     def __bazowyCallback(self):
 
-        self._wizualizacja.setSwiat(Swiat.Bazowy())
+        self._wizualizacja.setSwiat(self.__bazowySwiat())
         self._wizualizacja.paint()
 
     def __wczytajCallback(self):
@@ -88,3 +100,26 @@ class Aplikacja(Tk):
         popup = Toplevel(self)
         popup.title("dziennik")
         Label(popup, text=dziennik).pack()
+
+    def __bazowySwiat(self):
+        return Swiat(20, 20, [
+
+            Wilk(Wektor2d(1,1)),
+            Wilk(Wektor2d(2, 2)),
+            Trawa(Wektor2d(4,4)),
+            Trawa(Wektor2d(4, 2)),
+            Trawa(Wektor2d(10, 10)),
+            Owca(Wektor2d(14,14)),
+            Owca(Wektor2d(13, 14)),
+            Mlecz(Wektor2d(9,4)),
+            WilczeJagody(Wektor2d(12,14)),
+            Zolw(Wektor2d(14,15)),
+            Zolw(Wektor2d(15,16)),
+            Guarana(Wektor2d(17,17)),
+            BarszczSosnowskiego(Wektor2d(17, 5)),
+            Antylopa(Wektor2d(13,4)),
+            Lis(Wektor2d(12, 12)),
+            Czlowiek(Wektor2d(5,5))
+
+        ])
+
