@@ -1,5 +1,7 @@
 from tkinter import *
 from tkinter import ttk, messagebox, filedialog
+from tkinter.messagebox import showinfo
+
 from gui.wizualizacja import Wizualizacja
 from pomocnicze.menedzer_plikow import MenedzerPlikow
 from pomocnicze.wektor2d import Wektor2d
@@ -51,6 +53,7 @@ class Aplikacja(Tk):
         menuPlik = Menu(menuBar, tearoff=False)
 
         menuNowy.add_command(label="Bazowy", command=self.__bazowyCallback)
+        menuNowy.add_command(label="Pusty", command=self.__pustyCallback)
 
         menuPlik.add_command(label="Wczytaj", command=self.__wczytajCallback)
         menuPlik.add_command(label="Zapisz", command=self.__zapiszCallback)
@@ -79,7 +82,7 @@ class Aplikacja(Tk):
     def __bazowyCallback(self):
 
         self._wizualizacja.setSwiat(self.__bazowySwiat())
-        self._wizualizacja.paint()
+
 
     def __wczytajCallback(self):
 
@@ -96,7 +99,9 @@ class Aplikacja(Tk):
 
         self._wizualizacja.setSwiat(sw)
 
+    def __pustyCallback(self):
 
+        self._wizualizacja.setSwiat(self.__pustySwiat())
 
 
     def __zapiszCallback(self):
@@ -115,11 +120,8 @@ class Aplikacja(Tk):
         self._wizualizacja.paint()
 
     def __dziennikCallback(self):
-
         dziennik = self._wizualizacja.getDziennik().wypisz()
-        popup = Toplevel(self)
-        popup.title("dziennik")
-        Label(popup, text=dziennik).pack()
+        showinfo("Dziennik", dziennik)
 
     def __bazowySwiat(self):
         return Swiat(20, 20, [
@@ -143,3 +145,6 @@ class Aplikacja(Tk):
 
         ])
 
+    def __pustySwiat(self):
+
+        return Swiat(20,20)

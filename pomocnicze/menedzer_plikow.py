@@ -75,8 +75,6 @@ class MenedzerPlikow:
         if isinstance(org, Czlowiek):
             org.setTurySpecjalne(int(args[4]))
 
-
-
         return org
 
     def __alokujPoNazwie(self, nazwa: str):

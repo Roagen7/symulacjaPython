@@ -1,7 +1,21 @@
+import copy
 from tkinter import *
 from tkinter import ttk
+from tkinter.messagebox import showinfo
 
 from pomocnicze.wektor2d import Wektor2d
+from symulacja.organizmy.organizm import Organizm
+from symulacja.organizmy.rosliny.barszcz_sosnowskiego import BarszczSosnowskiego
+from symulacja.organizmy.rosliny.guarana import Guarana
+from symulacja.organizmy.rosliny.mlecz import Mlecz
+from symulacja.organizmy.rosliny.trawa import Trawa
+from symulacja.organizmy.rosliny.wilcze_jagody import WilczeJagody
+from symulacja.organizmy.zwierzeta.antylopa import Antylopa
+from symulacja.organizmy.zwierzeta.czlowiek import Czlowiek
+from symulacja.organizmy.zwierzeta.lis import Lis
+from symulacja.organizmy.zwierzeta.owca import Owca
+from symulacja.organizmy.zwierzeta.wilk import Wilk
+from symulacja.organizmy.zwierzeta.zolw import Zolw
 from symulacja.swiat import Swiat
 
 from random import randint
@@ -48,13 +62,15 @@ class Wizualizacja(Canvas):
                                       x * self.__rozmiarZwierzecia + self.__rozmiarZwierzecia,
                                       y * self.__rozmiarZwierzecia + self.__rozmiarZwierzecia,
                                       fill=org.rysowanie())
+        if self.__maCzlowieka():
 
-        self.czlowiekInfo()
+            self.czlowiekInfo()
 
     def __eventy(self):
 
         def klik(event):
-            print(event.x,event.y)
+
+            self.__initPopup(event)
 
 
         def klawisz(event):
@@ -122,6 +138,72 @@ class Wizualizacja(Canvas):
     def getSwiat(self):
         return self.__swiat
 
+    def __maCzlowieka(self) -> bool:
+        for org in self.__swiat.getOrganizmy():
+
+            if isinstance(org, Czlowiek):
+
+                return True
+
+        return False
+
+
+    def __initPopup(self, event):
+
+        popup = Toplevel(self)
+        popup.title("organizmy")
+        popup.attributes('-type', 'dialog')
+
+
+        popup.geometry(f"150x350+{event.x}+{event.y}")
+        popup.bind("<FocusOut>", lambda ev: ev.widget.destroy())
+        popup.resizable(False,False)
+
+        p0 = Wektor2d(0, 0)
+
+        organizmy = [
+
+            # Czlowiek(p0),
+            Wilk(p0),
+            Owca(p0),
+            Lis(p0),
+            Zolw(p0),
+            Antylopa(p0),
+            Trawa(p0),
+            Mlecz(p0),
+            Guarana(p0),
+            WilczeJagody(p0),
+            BarszczSosnowskiego(p0)
+
+        ]
+
+        for i in range(len(organizmy)):
+
+            org = organizmy[i]
+
+            Button(popup, text=str(org),
+                   bg=org.rysowanie(),
+                   command=lambda o=copy.deepcopy(org): self.__polozOrganizm(o,Wektor2d(event.y,event.x), popup)).pack()
+
+
+    def __polozOrganizm(self, org : Organizm, pos : Wektor2d, main):
+        print(org)
+        main.destroy()
+
+
+        nowePolozenie = Wektor2d(int(pos.getY() / self.__rozmiarZwierzecia), int(pos.getX()/ self.__rozmiarZwierzecia))
+
+        kolidujacy = self.__swiat.getOrganizmNaPozycji(nowePolozenie)
+
+        while kolidujacy is not None:
+
+            kolidujacy.zabij()
+            kolidujacy = self.__swiat.getOrganizmNaPozycji(nowePolozenie)
+
+        org.setPolozenie(nowePolozenie)
+        self.__swiat.addOrganizm(org)
+
+        self.paint()
 
 
 
