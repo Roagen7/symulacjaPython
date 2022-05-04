@@ -70,6 +70,10 @@ class Organizm(ABC):
 
         return False
 
+    def isOdpornyNaToksyny(self) -> bool:
+
+        return False
+
 
     def czyUciekl(self) -> bool:
 

@@ -144,7 +144,7 @@ class Aplikacja(Tk):
             Antylopa(Wektor2d(13,4)),
             Lis(Wektor2d(12, 12)),
             Czlowiek(Wektor2d(5,5)),
-            Cyberowca(Wektor2d(7,9))
+            Cyberowca(Wektor2d(7,9)),
 
         ])
 

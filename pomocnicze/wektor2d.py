@@ -37,7 +37,10 @@ class Wektor2d:
 
         return self.__y < 0 or self.__x < 0 or self.__y >= wysokosc or self.__x >= szerokosc
 
+    def len(self):
+        return sqrt(self.__y**2 + self.__x**2)
+
     def znormalizowany(self):
-        len = sqrt(self.__y**2 + self.__x**2)
+        len = self.len()
 
         return Wektor2d(ceil(self.__y/len), ceil(self.__x/len))

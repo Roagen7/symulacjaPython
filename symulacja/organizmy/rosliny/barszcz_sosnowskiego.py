@@ -21,7 +21,7 @@ class BarszczSosnowskiego(Roslina):
 
                 org = self._swiat.getOrganizmNaPozycji(self.getPolozenie() + Wektor2d(y,x))
 
-                if isinstance(org,Zwierze):
+                if isinstance(org,Zwierze) and not org.isOdpornyNaToksyny():
                     org.zabij()
 
 
@@ -29,6 +29,9 @@ class BarszczSosnowskiego(Roslina):
 
 
     def dodajModyfikator(self, other : Organizm):
+
+        if other.isOdpornyNaToksyny():
+            return
 
         other.zabij()
 

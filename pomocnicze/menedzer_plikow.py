@@ -8,6 +8,7 @@ from symulacja.organizmy.rosliny.mlecz import Mlecz
 from symulacja.organizmy.rosliny.trawa import Trawa
 from symulacja.organizmy.rosliny.wilcze_jagody import WilczeJagody
 from symulacja.organizmy.zwierzeta.antylopa import Antylopa
+from symulacja.organizmy.zwierzeta.cyberowca import Cyberowca
 from symulacja.organizmy.zwierzeta.czlowiek import Czlowiek
 from symulacja.organizmy.zwierzeta.lis import Lis
 from symulacja.organizmy.zwierzeta.owca import Owca
@@ -92,7 +93,8 @@ class MenedzerPlikow:
             Mlecz(p0),
             Guarana(p0),
             WilczeJagody(p0),
-            BarszczSosnowskiego(p0)
+            BarszczSosnowskiego(p0),
+            Cyberowca(p0)
 
         ]
 

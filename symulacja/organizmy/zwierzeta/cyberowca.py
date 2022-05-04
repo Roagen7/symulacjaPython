@@ -11,7 +11,7 @@ class Cyberowca(Zwierze):
 
     def __init__(self, polozenie: Wektor2d):
         super().__init__(polozenie, Cyberowca.SILA, Cyberowca.INICJATYWA)
-        self._rozmnozylSie = True
+        # self._rozmnozylSie = True
 
     def akcja(self):
 
@@ -22,7 +22,7 @@ class Cyberowca(Zwierze):
 
                 poz = org.getPolozenie()
                 if min_polozenie == self.getPolozenie() or \
-                    min_polozenie - self.getPolozenie() > poz - self.getPolozenie():
+                        (min_polozenie - self.getPolozenie()).len() > (poz - self.getPolozenie()).len():
 
                     min_polozenie = poz
 
@@ -36,11 +36,12 @@ class Cyberowca(Zwierze):
         self._zmienPolozenie(zm)
 
 
+    def isOdpornyNaToksyny(self) -> bool:
+
+        return True
 
     def nowaTura(self):
-        pass
 
-    def zabij(self):
         pass
 
 
@@ -50,4 +51,4 @@ class Cyberowca(Zwierze):
 
     def __str__(self):
 
-        return "OWCA"
+        return "CYBEROWCA"
