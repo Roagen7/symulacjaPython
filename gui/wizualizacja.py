@@ -154,16 +154,18 @@ class Wizualizacja(Canvas):
         popup.title("organizmy")
         popup.attributes('-type', 'dialog')
 
-
-        popup.geometry(f"150x350+{event.x}+{event.y}")
+        popup.geometry(f"150x350+{self.winfo_x() + event.x}+{self.winfo_y() + event.y}")
         popup.bind("<FocusOut>", lambda ev: ev.widget.destroy())
+        popup.focus_set()
         popup.resizable(False,False)
+        popup.wm_transient(self)
+
 
         p0 = Wektor2d(0, 0)
 
         organizmy = [
 
-            # Czlowiek(p0),
+
             Wilk(p0),
             Owca(p0),
             Lis(p0),
@@ -176,6 +178,10 @@ class Wizualizacja(Canvas):
             BarszczSosnowskiego(p0)
 
         ]
+
+        if not self.__maCzlowieka():
+            organizmy.append(Czlowiek(p0))
+
 
         for i in range(len(organizmy)):
 

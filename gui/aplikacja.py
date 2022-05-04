@@ -11,6 +11,7 @@ from symulacja.organizmy.rosliny.mlecz import Mlecz
 from symulacja.organizmy.rosliny.trawa import Trawa
 from symulacja.organizmy.rosliny.wilcze_jagody import WilczeJagody
 from symulacja.organizmy.zwierzeta.antylopa import Antylopa
+from symulacja.organizmy.zwierzeta.cyberowca import Cyberowca
 from symulacja.organizmy.zwierzeta.czlowiek import Czlowiek
 from symulacja.organizmy.zwierzeta.lis import Lis
 from symulacja.organizmy.zwierzeta.owca import Owca
@@ -36,6 +37,7 @@ class Aplikacja(Tk):
 
         self.geometry(f"{szerokosc}x{wysokosc}")
         self.minsize(szerokosc, wysokosc)
+
 
         self.title(Aplikacja.TYTUL)
 
@@ -141,7 +143,8 @@ class Aplikacja(Tk):
             BarszczSosnowskiego(Wektor2d(17, 5)),
             Antylopa(Wektor2d(13,4)),
             Lis(Wektor2d(12, 12)),
-            Czlowiek(Wektor2d(5,5))
+            Czlowiek(Wektor2d(5,5)),
+            Cyberowca(Wektor2d(7,9))
 
         ])
 

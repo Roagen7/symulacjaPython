@@ -1,3 +1,6 @@
+from math import ceil, sqrt
+
+
 class Wektor2d:
 
 
@@ -34,3 +37,7 @@ class Wektor2d:
 
         return self.__y < 0 or self.__x < 0 or self.__y >= wysokosc or self.__x >= szerokosc
 
+    def znormalizowany(self):
+        len = sqrt(self.__y**2 + self.__x**2)
+
+        return Wektor2d(ceil(self.__y/len), ceil(self.__x/len))

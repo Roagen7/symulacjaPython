@@ -11,7 +11,7 @@ class Zwierze(Organizm):
     def __init__(self, polozenie: Wektor2d, sila: int, inicjatywa: int):
 
         super().__init__(polozenie, sila, inicjatywa)
-        self.__rozmnozylSie = False
+        self._rozmnozylSie = False
 
 
     def akcja(self):
@@ -36,7 +36,7 @@ class Zwierze(Organizm):
 
     def nowaTura(self):
 
-        self.__rozmnozylSie = False
+        self._rozmnozylSie = False
 
 
 
@@ -82,7 +82,7 @@ class Zwierze(Organizm):
 
         miejsceNarodzin = self._swiat.getWolnePoleObok(drugi.getPolozenie())
 
-        if miejsceNarodzin == drugi.getPolozenie() or drugi.__rozmnozylSie or self.__rozmnozylSie:
+        if miejsceNarodzin == drugi.getPolozenie() or drugi._rozmnozylSie or self._rozmnozylSie:
             return
 
 
@@ -92,8 +92,8 @@ class Zwierze(Organizm):
         self._swiat.addOrganizm(org)
 
 
-        self.__rozmnozylSie = True
-        drugi.__rozmnozylSie = True
+        self._rozmnozylSie = True
+        drugi._rozmnozylSie = True
 
 
 
