@@ -49,6 +49,7 @@ class Wizualizacja(Canvas):
                                       y * self.__rozmiarZwierzecia + self.__rozmiarZwierzecia,
                                       fill=org.rysowanie())
 
+        self.czlowiekInfo()
 
     def __eventy(self):
 
@@ -57,7 +58,23 @@ class Wizualizacja(Canvas):
 
 
         def klawisz(event):
-            print(event.char)
+
+            if event.keysym == "Up":
+                self.__swiat.setRuch(Swiat.Ruch.GORA)
+
+            elif event.keysym == "Down":
+                self.__swiat.setRuch(Swiat.Ruch.DOL)
+
+            elif event.keysym == "Left":
+                self.__swiat.setRuch(Swiat.Ruch.LEWO)
+
+            elif event.keysym == "Right":
+                self.__swiat.setRuch(Swiat.Ruch.PRAWO)
+
+            elif event.keysym == "z":
+                self.__swiat.setRuch(Swiat.Ruch.SPECJALNY)
+
+            self.paint()
 
         self.bind("<Button-1>",klik)
         self.bind("<Key>",klawisz)
@@ -72,4 +89,34 @@ class Wizualizacja(Canvas):
 
     def setSwiat(self, swiat: Swiat):
         self.__swiat = swiat
+
+    def czlowiekInfo(self):
+
+        ruch = self.__swiat.getRuch()
+
+        komunikat = "Ruch czlowieka: "
+
+        if ruch == Swiat.Ruch.GORA:
+            komunikat += "do gory"
+
+        elif ruch == Swiat.Ruch.DOL:
+            komunikat += "na dol"
+
+        elif ruch == Swiat.Ruch.STOJ:
+            komunikat += "bedzie stal"
+
+        elif ruch == Swiat.Ruch.LEWO:
+            komunikat += "w lewo"
+
+        elif ruch == Swiat.Ruch.PRAWO:
+            komunikat += "w prawo"
+
+        elif ruch == Swiat.Ruch.SPECJALNY:
+            komunikat += "uruchomi umiejetnosc specjalna"
+
+
+        self.create_text(10,10,text=komunikat, fill ="pink", anchor=W)
+
+
+
 

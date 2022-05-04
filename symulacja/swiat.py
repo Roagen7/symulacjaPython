@@ -1,3 +1,4 @@
+import copy
 from random import randint
 
 from pomocnicze.dziennik import Dziennik
@@ -15,9 +16,17 @@ from symulacja.organizmy.zwierzeta.lis import Lis
 from symulacja.organizmy.zwierzeta.owca import Owca
 from symulacja.organizmy.zwierzeta.wilk import Wilk
 from symulacja.organizmy.zwierzeta.zolw import Zolw
-
+from enum import Enum
 
 class Swiat:
+
+    class Ruch(Enum):
+        GORA = 0
+        DOL = 1
+        LEWO = 2
+        PRAWO = 3
+        SPECJALNY = 4
+        STOJ = 5
 
     def __init__(self, wysokosc: int, szerokosc: int, organizmy=None):
 
@@ -32,6 +41,7 @@ class Swiat:
         self.__organizmy = organizmy
         self.__nrTury = 0
         self.__dziennik = Dziennik()
+        self.__ruch = Swiat.Ruch.STOJ
 
     def getWysokosc(self):
         return self.__wysokosc
@@ -133,6 +143,20 @@ class Swiat:
 
         return None
 
+    def setRuch(self, ruch : Ruch):
+
+        self.__ruch = ruch
+
+    def popRuch(self):
+
+        obecny = copy.deepcopy(self.__ruch)
+        self.__ruch = Swiat.Ruch.STOJ
+
+        return obecny
+
+    def getRuch(self):
+
+        return self.__ruch
 
     @staticmethod
     def Bazowy():
