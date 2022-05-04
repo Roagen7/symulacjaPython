@@ -92,12 +92,16 @@ class Aplikacja(Tk):
 
         if sw is None:
             messagebox.showerror("Blad","blad pliku")
+            return
+
+        self._wizualizacja.setSwiat(sw)
 
 
 
 
     def __zapiszCallback(self):
-        fname = filedialog.askopenfilename()
+
+        fname = filedialog.asksaveasfilename()
 
         if fname == "":
             return

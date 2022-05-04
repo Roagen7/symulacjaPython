@@ -66,3 +66,6 @@ class Czlowiek(Zwierze):
 
     def getTurySpecjalne(self):
         return self.__turySpecjalne
+
+    def setTurySpecjalne(self, tury : int):
+        self.__turySpecjalne = tury

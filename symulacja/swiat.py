@@ -150,28 +150,8 @@ class Swiat:
 
         return self.__ruch
 
-    # @staticmethod
-    # def Bazowy():
-    #
-    #     swiat = Swiat(20, 20, [
-    #
-    #         Wilk(Wektor2d(1,1)),
-    #         Wilk(Wektor2d(2, 2)),
-    #         Trawa(Wektor2d(4,4)),
-    #         Trawa(Wektor2d(4, 2)),
-    #         Trawa(Wektor2d(10, 10)),
-    #         Owca(Wektor2d(14,14)),
-    #         Owca(Wektor2d(13, 14)),
-    #         Mlecz(Wektor2d(9,4)),
-    #         WilczeJagody(Wektor2d(12,14)),
-    #         Zolw(Wektor2d(14,15)),
-    #         Zolw(Wektor2d(15,16)),
-    #         Guarana(Wektor2d(17,17)),
-    #         BarszczSosnowskiego(Wektor2d(17, 5)),
-    #         Antylopa(Wektor2d(13,4)),
-    #         Lis(Wektor2d(12, 12)),
-    #         Czlowiek(Wektor2d(5,5))
-    #
-    #     ])
-    #
-    #     return swiat
+    def getNrTury(self):
+        return self.__nrTury
+
+    def setNrTury(self, t):
+        self.__nrTury = t

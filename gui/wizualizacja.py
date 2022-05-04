@@ -89,6 +89,8 @@ class Wizualizacja(Canvas):
 
     def setSwiat(self, swiat: Swiat):
         self.__swiat = swiat
+        self.paint()
+
 
     def czlowiekInfo(self):
 
