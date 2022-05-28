@@ -23,7 +23,7 @@ class MenedzerPlikow:
 
         with open(name, "w") as out:
 
-            out.write(f"{swiat.getNrTury()} {swiat.getWysokosc()} {swiat.getSzerokosc()}\n")
+            out.write(f"{swiat.getNrTury()} {swiat.getWysokosc()} {swiat.getSzerokosc()} {'KART' if swiat.getTyp() == Swiat.Typ.KARTEZJANSKI else 'HEX'}\n")
 
             for org in swiat.getOrganizmy():
 
@@ -44,10 +44,11 @@ class MenedzerPlikow:
 
                 r = [el for el in r if el != ""]
 
-                t, h, w = [int(el) for el in r[0].split(" ")]
+                t, h, w, typ = [el for el in r[0].split(" ")]
 
-                sw = Swiat(h, w)
-                sw.setNrTury(t)
+                sw = Swiat(int(h), int(w), None, Swiat.Typ.HEX if typ == "HEX" else Swiat.Typ.KARTEZJANSKI)
+                sw.setNrTury(int(t))
+
 
                 for i in range(1, len(r)):
                     org = self.__wczytajOrganizm(r[i])

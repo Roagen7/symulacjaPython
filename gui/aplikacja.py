@@ -54,8 +54,9 @@ class Aplikacja(Tk):
         menuNowy = Menu(menuBar, tearoff=False)
         menuPlik = Menu(menuBar, tearoff=False)
 
-        menuNowy.add_command(label="Bazowy", command=self.__bazowyCallback)
-        menuNowy.add_command(label="Pusty", command=self.__pustyCallback)
+        menuNowy.add_command(label="Bazowy_Kartezjanski", command=self.__bazowyCallback)
+
+        menuNowy.add_command(label="Bazowy_Hex", command=self.__bazowyHexCallback)
 
         menuPlik.add_command(label="Wczytaj", command=self.__wczytajCallback)
         menuPlik.add_command(label="Zapisz", command=self.__zapiszCallback)
@@ -101,9 +102,9 @@ class Aplikacja(Tk):
 
         self._wizualizacja.setSwiat(sw)
 
-    def __pustyCallback(self):
+    def __bazowyHexCallback(self):
 
-        self._wizualizacja.setSwiat(self.__pustySwiat())
+        self._wizualizacja.setSwiat(self.__bazowySwiat(Swiat.Typ.HEX))
 
 
     def __zapiszCallback(self):
@@ -125,7 +126,7 @@ class Aplikacja(Tk):
         dziennik = self._wizualizacja.getDziennik().wypisz()
         showinfo("Dziennik", dziennik)
 
-    def __bazowySwiat(self):
+    def __bazowySwiat(self, typ = Swiat.Typ.KARTEZJANSKI):
         return Swiat(20, 20, [
 
             Wilk(Wektor2d(1,1)),
@@ -137,8 +138,6 @@ class Aplikacja(Tk):
             Owca(Wektor2d(13, 14)),
             Mlecz(Wektor2d(9,4)),
             WilczeJagody(Wektor2d(12,14)),
-            Zolw(Wektor2d(14,15)),
-            Zolw(Wektor2d(15,16)),
             Guarana(Wektor2d(17,17)),
             BarszczSosnowskiego(Wektor2d(17, 5)),
             Antylopa(Wektor2d(13,4)),
@@ -146,7 +145,7 @@ class Aplikacja(Tk):
             Czlowiek(Wektor2d(5,5)),
             Cyberowca(Wektor2d(7,9)),
 
-        ], Swiat.Typ.HEX)
+        ], typ)
 
     def __pustySwiat(self):
 
