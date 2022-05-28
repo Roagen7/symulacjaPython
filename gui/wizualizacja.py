@@ -1,4 +1,5 @@
 import copy
+import math
 from tkinter import *
 from tkinter import ttk
 from tkinter.messagebox import showinfo
@@ -48,7 +49,6 @@ class Wizualizacja(Canvas):
 
     def paint(self):
 
-
         self.create_rectangle(0,0,self.__rozmiarZwierzecia *self.__szerokosc, self.__rozmiarZwierzecia * self.__wysokosc, fill=Wizualizacja.__KOLOR_TLA)
 
         for y in range(self.__wysokosc):
@@ -56,13 +56,37 @@ class Wizualizacja(Canvas):
 
                 org = self.__swiat.getOrganizmNaPozycji(Wektor2d(y,x))
 
-                if not org is None:
+                if org is not None:
 
-                    self.create_rectangle(x * self.__rozmiarZwierzecia,
-                                      y * self.__rozmiarZwierzecia,
-                                      x * self.__rozmiarZwierzecia + self.__rozmiarZwierzecia,
-                                      y * self.__rozmiarZwierzecia + self.__rozmiarZwierzecia,
-                                      fill=org.rysowanie())
+                    if self.__swiat.getTyp() == Swiat.Typ.KARTEZJANSKI:
+
+                        self.create_rectangle(x * self.__rozmiarZwierzecia,
+                                          y * self.__rozmiarZwierzecia,
+                                          x * self.__rozmiarZwierzecia + self.__rozmiarZwierzecia,
+                                          y * self.__rozmiarZwierzecia + self.__rozmiarZwierzecia,
+                                          fill=org.rysowanie())
+
+                    else:
+                        points = []
+
+                        xtemp = x
+
+                        if y % 2 == 0:
+                            xtemp = x + 0.5
+
+                        for i in range(0,6):
+
+                            xval = xtemp * self.__rozmiarZwierzecia + self.__rozmiarZwierzecia / 2 *\
+                                   math.sin(i * 2 * math.pi / 6)
+                            yval = y * self.__rozmiarZwierzecia + self.__rozmiarZwierzecia / 2 * \
+                                   math.cos(i * 2 * math.pi / 6)
+
+                            points.append(xval)
+                            points.append(yval)
+
+
+                        self.create_polygon(points, fill=org.rysowanie())
+
         if self.__maCzlowieka():
 
             self.czlowiekInfo()

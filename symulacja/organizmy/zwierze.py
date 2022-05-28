@@ -66,6 +66,10 @@ class Zwierze(Organizm):
 
     def _zmienPolozenie(self, przemieszczenie: Wektor2d):
 
+        if self._swiat.getTyp() and (przemieszczenie == Wektor2d(-1,-1) or przemieszczenie == Wektor2d(1,-1)):
+            return
+
+
         if not (self.getPolozenie() + przemieszczenie) \
             .pozaGranicami(self._swiat.getWysokosc(), self._swiat.getSzerokosc()):
 

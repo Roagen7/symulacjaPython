@@ -146,7 +146,7 @@ class Aplikacja(Tk):
             Czlowiek(Wektor2d(5,5)),
             Cyberowca(Wektor2d(7,9)),
 
-        ])
+        ], Swiat.Typ.HEX)
 
     def __pustySwiat(self):
 

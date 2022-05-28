@@ -8,6 +8,10 @@ from enum import Enum
 
 class Swiat:
 
+    class Typ(Enum):
+        KARTEZJANSKI = 0,
+        HEX = 1
+
     class Ruch(Enum):
         GORA = 0
         DOL = 1
@@ -16,7 +20,7 @@ class Swiat:
         SPECJALNY = 4
         STOJ = 5
 
-    def __init__(self, wysokosc: int, szerokosc: int, organizmy=None):
+    def __init__(self, wysokosc: int, szerokosc: int, organizmy=None, typ = Typ.KARTEZJANSKI):
 
         if organizmy is None:
             organizmy = []
@@ -30,6 +34,10 @@ class Swiat:
         self.__nrTury = 0
         self.__dziennik = Dziennik()
         self.__ruch = Swiat.Ruch.STOJ
+        self.__typ = typ
+
+    def getTyp(self):
+        return self.__typ
 
     def getWysokosc(self):
         return self.__wysokosc
@@ -90,6 +98,9 @@ class Swiat:
         for dy in [-1 * zasieg, 0, zasieg]:
 
             for dx in [-1 * zasieg, 0, zasieg]:
+
+                if self.__typ == Swiat.Typ.HEX and ( (dy == -1 and dx == -1) or (dy == 1 and dx == -1)):
+                    continue
 
                 punkt =  Wektor2d(dy,dx) + p
 
